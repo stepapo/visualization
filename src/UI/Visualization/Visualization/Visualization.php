@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization\UI\Visualization\Visualization;
 
+use Stepapo\Utils\ConfigProcessor;
 use Stepapo\Visualization\Column;
 use Stepapo\Visualization\VisualizationView;
 use Stepapo\Visualization\Filter;
@@ -82,7 +83,7 @@ class Visualization extends VisualizationControl implements MainComponent
     public static function createFromNeon(string $file, array $params = []): Visualization
     {
         $config = (array) Neon::decode(FileSystem::read($file));
-        $parsedConfig = Utils::replaceParams($config, $params);
+        $parsedConfig = ConfigProcessor::replaceParams($config, $params);
         return self::createFromArray((array) $parsedConfig);
     }
 
