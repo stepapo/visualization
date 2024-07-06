@@ -1,0 +1,18 @@
+{templateType Stepapo\Visualization\UI\Visualization\Chart\ChartTemplate}
+
+<p n:if="$valueColumn->description" class="data-description">
+    {$valueColumn->description}:
+</p>
+
+{if $count > 0}
+    <div class="responsive">
+        <div class="chart-cover-2" style="width: 100%; min-width: 980px; margin-top: 20px;">
+            <div id="chart" class="chart" data-table="{$table|escapeJs}" data-options="{$options|escapeJs}" data-number-formats="{$numberFormats|escapeJs}" data-chart-type="{$chartType}" style="height: 500px;">
+            </div>
+        </div>
+    </div>
+{else}
+    <p style="margin: 20px 0">
+        Nedostatek dat pro zobrazení grafu.
+    </p>
+{/}

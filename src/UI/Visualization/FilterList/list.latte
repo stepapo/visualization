@@ -1,0 +1,11 @@
+{templateType Stepapo\Visualization\UI\Visualization\FilterList\FilterListTemplate}
+
+{snippet}
+    {foreach $columns as $column}
+        {if $column->filter}
+            {if $column->cross && $column->name != $columnColumn->name}
+                {control 'filter-' . $column->name}
+            {/}
+        {/}
+    {/}
+{/}

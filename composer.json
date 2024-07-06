@@ -1,0 +1,27 @@
+{
+    "name": "stepapo/visualization",
+    "type": "library",
+    "description": "Component for Nette Framework and Nextras ORM, that helps generate visualizations from collections using Google Charts.",
+    "keywords": ["nette", "nextras", "table", "grid", "component"],
+    "homepage": "https://github.com/stepapo/visualization",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Štěpán Postler"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/stepapo/visualization/issues"
+    },
+    "require": {
+        "php": ">=7.4",
+        "nette/application": "^3.0",
+        "nette/utils": "^3.0",
+        "nextras/orm": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stepapo\\Visualization\\": "src/"
+        }
+    }
+}

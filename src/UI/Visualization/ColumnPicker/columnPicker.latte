@@ -1,0 +1,16 @@
+{templateType Stepapo\Visualization\UI\Visualization\ColumnPicker\ColumnPickerTemplate}
+
+<div class="mb-2 responsive" n:snippet>
+{*    <div class="d-block mobile-hide" style="margin: 5px 0">Osa Y:</div>*}
+{*    <div class="btn-group-vertical d-block mobile-hide space">*}
+{*        <a n:foreach="$columns as $c" n:if="$c->cross && $rowColumn->name != $c->name" n:href="pick! column: $c->name" n:class="btn, btn-sm, text-left, ajax, $c->name == $column ? btn-primary : btn-secondary">*}
+{*            {$c->label}*}
+{*        </a>*}
+{*    </div>*}
+    <div class="btn-group btn-group-sm space">
+        <div class="btn-group-header">Osa X:</div>
+        <a n:foreach="$columns as $c" n:if="$c->cross && $rowColumn->name != $c->name" n:href="pick! column: $c->name" n:class="btn, btn-sm, ajax, $c->name == $column ? btn-primary : btn-secondary">
+            {$c->label}
+        </a>
+    </div>
+</div>

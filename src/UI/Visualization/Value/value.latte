@@ -1,0 +1,4 @@
+{contentType javascript}
+{templateType Stepapo\Visualization\UI\Visualization\Value\ValueTemplate}
+
+{if $value === null}null{else}{$value * ($column->multiply ?: 1)}{/}
