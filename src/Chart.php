@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization;
 
-use Nette\InvalidArgumentException;
-use Nextras\Orm\Collection\ICollection;
-
 
 class Chart
 {

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization\UI;
 
-use Stepapo\Visualization\Column;
-use Stepapo\Visualization\View;
+use Contributte\ImageStorage\ImageStorage;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Security\User;
-use Contributte\ImageStorage\ImageStorage;
+use Stepapo\Visualization\Column;
+use Stepapo\Visualization\View;
 
 
 abstract class DataControlTemplate extends Template

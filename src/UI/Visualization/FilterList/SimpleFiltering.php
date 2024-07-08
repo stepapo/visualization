@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization\UI\Visualization\FilterList;
 
-use Stepapo\Visualization\UI\DataControl;
-use Stepapo\Visualization\UI\Visualization\VisualizationControl;
-use Stepapo\Visualization\UI\Visualization\Filter\Filter;
 use Nette\Application\UI\Multiplier;
+use Stepapo\Visualization\UI\Visualization\Filter\Filter;
+use Stepapo\Visualization\UI\Visualization\VisualizationControl;
 
 
 /**

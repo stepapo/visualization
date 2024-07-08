@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization;
 
-use Nextras\Orm\Collection\ICollection;
-
 
 class Filter
 {
@@ -149,7 +147,7 @@ class Filter
     }
 
 
-    public function getNextrasName(bool $withThis = true)
+    public function getNextrasName()
     {
         if (str_contains($this->columnName, '.')) {
             return str_replace('.', '->', $this->columnName);

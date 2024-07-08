@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization\UI\Visualization\Chart;
 
-use Stepapo\Visualization\UI\Visualization\VisualizationControl;
-use Stepapo\Visualization\UI\Visualization\Item\Item;
-use Nette\Application\UI\Multiplier;
 use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Relationships\HasMany;
+use Stepapo\Visualization\UI\Visualization\Item\Item;
+use Stepapo\Visualization\UI\Visualization\VisualizationControl;
 
 
 /**

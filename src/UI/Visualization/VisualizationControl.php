@@ -5,15 +5,8 @@ declare(strict_types=1);
 namespace Stepapo\Visualization\UI\Visualization;
 
 use Stepapo\Visualization\Column;
-use Stepapo\Visualization\Factory;
-use Stepapo\Visualization\UI\Visualization\Visualization\Visualization;
 use Stepapo\Visualization\UI\DataControl;
-use Stepapo\Visualization\View;
-use Nette\Application\UI\Control;
-use Nette\Application\UI\ITemplate;
-use Nette\Application\UI\Template;
-use Nextras\Orm\Collection\ICollection;
-use Contributte\ImageStorage\ImageStorage;
+use Stepapo\Visualization\UI\Visualization\Visualization\Visualization;
 
 
 abstract class VisualizationControl extends DataControl

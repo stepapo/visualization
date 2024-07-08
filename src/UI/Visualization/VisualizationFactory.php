@@ -6,8 +6,8 @@ namespace Stepapo\Visualization\UI\Visualization;
 
 use Stepapo\Visualization\Column;
 use Stepapo\Visualization\Factory;
-use Stepapo\Visualization\UI\Visualization\Chart\SimpleChart;
 use Stepapo\Visualization\UI\Visualization\Chart\Chart;
+use Stepapo\Visualization\UI\Visualization\Chart\SimpleChart;
 use Stepapo\Visualization\UI\Visualization\ColumnPicker\ColumnPicker;
 use Stepapo\Visualization\UI\Visualization\ColumnPicker\SimpleColumnPicker;
 use Stepapo\Visualization\UI\Visualization\Filter\Filter;

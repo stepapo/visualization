@@ -327,7 +327,7 @@ class Column
 	}
 
 
-    public function getNextrasName(bool $withThis = true)
+    public function getNextrasName()
     {
         if (str_contains($this->columnName, '.')) {
             return str_replace('.', '->', $this->columnName);

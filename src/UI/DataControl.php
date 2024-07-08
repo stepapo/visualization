@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Stepapo\Visualization\UI;
 
 use Contributte\ImageStorage\ImageStorage;
-use Stepapo\Visualization\Column;
-use Stepapo\Visualization\Factory;
-use Stepapo\Visualization\View;
 use Latte\Essential\RawPhpExtension;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Template;
 use Nextras\Orm\Collection\ICollection;
+use Stepapo\Visualization\Column;
+use Stepapo\Visualization\Factory;
+use Stepapo\Visualization\View;
 
 
 abstract class DataControl extends Control

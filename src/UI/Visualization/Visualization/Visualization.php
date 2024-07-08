@@ -4,33 +4,32 @@ declare(strict_types=1);
 
 namespace Stepapo\Visualization\UI\Visualization\Visualization;
 
+use Contributte\ImageStorage\ImageStorage;
+use Nette\InvalidArgumentException;
+use Nette\Neon\Neon;
+use Nette\Utils\FileSystem;
+use Nextras\Orm\Collection\ICollection;
 use Stepapo\Utils\ConfigProcessor;
 use Stepapo\Visualization\Column;
-use Stepapo\Visualization\VisualizationView;
 use Stepapo\Visualization\Filter;
 use Stepapo\Visualization\LatteFilter;
 use Stepapo\Visualization\Link;
 use Stepapo\Visualization\Option;
 use Stepapo\Visualization\Sort;
-use Stepapo\Visualization\UI\Visualization\VisualizationControl;
-use Stepapo\Visualization\UI\Visualization\VisualizationFactory;
-use Stepapo\Visualization\UI\Visualization\Chart\SimpleChart;
+use Stepapo\Visualization\UI\MainComponent;
 use Stepapo\Visualization\UI\Visualization\Chart\Chart;
+use Stepapo\Visualization\UI\Visualization\Chart\SimpleChart;
 use Stepapo\Visualization\UI\Visualization\ColumnPicker\ColumnPicker;
 use Stepapo\Visualization\UI\Visualization\ColumnPicker\SimpleColumnPicker;
 use Stepapo\Visualization\UI\Visualization\Filter\SimpleFilter;
-use Stepapo\Visualization\UI\Visualization\FilterList\SimpleFilterList;
 use Stepapo\Visualization\UI\Visualization\FilterList\FilterList;
-use Stepapo\Visualization\UI\MainComponent;
+use Stepapo\Visualization\UI\Visualization\FilterList\SimpleFilterList;
 use Stepapo\Visualization\UI\Visualization\RowPicker\RowPicker;
 use Stepapo\Visualization\UI\Visualization\RowPicker\SimpleRowPicker;
 use Stepapo\Visualization\UI\Visualization\ValuePicker\ValuePicker;
-use Stepapo\Visualization\Utils;
-use Nette\InvalidArgumentException;
-use Nette\Neon\Neon;
-use Nette\Utils\FileSystem;
-use Nextras\Orm\Collection\ICollection;
-use Contributte\ImageStorage\ImageStorage;
+use Stepapo\Visualization\UI\Visualization\VisualizationControl;
+use Stepapo\Visualization\UI\Visualization\VisualizationFactory;
+use Stepapo\Visualization\VisualizationView;
 
 
 /**
@@ -83,7 +82,7 @@ class Visualization extends VisualizationControl implements MainComponent
     public static function createFromNeon(string $file, array $params = []): Visualization
     {
         $config = (array) Neon::decode(FileSystem::read($file));
-        $parsedConfig = ConfigProcessor::replaceParams($config, $params);
+        $parsedConfig = ConfigProcessor::process($config, $params);
         return self::createFromArray((array) $parsedConfig);
     }
 
