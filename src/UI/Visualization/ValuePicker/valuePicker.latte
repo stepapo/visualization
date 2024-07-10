@@ -12,7 +12,7 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a n:foreach="$columns as $c" n:if="$c->aggregation" n:href="pick! value: $c->name" n:class="dropdown-item, ajax">
+                        <a n:foreach="$columns as $c" n:if="!$c->cross" n:href="pick! value: $c->name" n:class="dropdown-item, ajax">
                             {$c->label}
                         </a>
                     </div>
@@ -21,12 +21,12 @@
             {var $selected = !$value}
             {var $it = 0}
                 {foreach $columns as $c}
-                    {if $c->aggregation}
+                    {if !$c->cross}
                         {if $it + 1 < $valueCollapse}
                             {if $selected === false}
                                 {var $selected = $c->name == $value}
                             {/}
-                            <a n:href="pick! value: $c->name" n:if="$c->aggregation" n:class="btn, btn-sm, text-left, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
+                            <a n:href="pick! value: $c->name" n:if="!$c->cross" n:class="btn, btn-sm, text-left, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
                                 {$c->label}
                             </a>
                         {elseif $it + 1 == $valueCollapse}
@@ -38,7 +38,7 @@
                                 <div class="dropdown-menu">
                                     {var $inIt = 0}
                                     {foreach $columns as $c}
-                                        {if $c->aggregation}
+                                        {if !$c->cross}
                                             <a n:if="($inIt >= $valueCollapse)" n:href="pick! value: $c->name" n:class="dropdown-item, ajax">
                                                 {$c->label}
                                             </a>
@@ -54,7 +54,7 @@
                 {/}
             {/}
         {else}
-            <a n:foreach="$columns as $c" n:if="$c->aggregation" n:href="pick! value: $c->name" n:class="btn, btn-sm, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
+            <a n:foreach="$columns as $c" n:if="!$c->cross" n:href="pick! value: $c->name" n:class="btn, btn-sm, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
                 {$c->label}
             </a>
         {/}
@@ -63,7 +63,7 @@
     </div>
     <div class="btn-group desktop-hide space">
         <div class="btn-group-header">Osa Y:</div>
-        <a n:foreach="$columns as $c" n:if="$c->aggregation" n:href="pick! value: $c->name" n:class="btn, btn-sm, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
+        <a n:foreach="$columns as $c" n:if="!$c->cross" n:href="pick! value: $c->name" n:class="btn, btn-sm, ajax, $c->name == $value ? btn-primary : btn-secondary"{if $c->description} data-tooltip="{$c->description}" data-tooltip-position="bottom"{/}>
             {$c->label}
         </a>
     </div>
