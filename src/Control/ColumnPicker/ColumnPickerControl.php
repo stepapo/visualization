@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stepapo\Visualization\Control\ColumnPicker;
 
 use Nette\Application\Attributes\Persistent;
+use Nette\Application\BadRequestException;
 use Stepapo\Data\Control\DataControl;
 use Stepapo\Visualization\Control\Visualization\VisualizationControl;
 
@@ -44,6 +45,9 @@ class ColumnPickerControl extends DataControl
 	public function handlePick(?string $column = null): void
 	{
 		$this->column = $column;
+		if (!isset($this->columns[$column]) || $this->columns[$column]->hide) {
+			throw new BadRequestException;
+		}
 		if ($this->presenter->isAjax()) {
 			$this->onPick($this);
 			$this->redrawControl();

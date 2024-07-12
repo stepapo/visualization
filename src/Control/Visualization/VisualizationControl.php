@@ -166,12 +166,10 @@ class VisualizationControl extends DataControl implements MainComponent
 			$addYear = true;
 			foreach ($this->getCrossColumnNames() as $columnName) {
 				$c = $this->visualization->columns[$columnName];
-				if ($c->filter && $c->name !== $this->getColumnColumn()->name) {
-					$filterValue = $this->getComponent('filterList')->getComponent('filter')->getComponent($columnName)->value;
-				} else {
-					$filterValue = null;
-				}
-				if ($column === $columnName || $filterValue) {
+				$filterValue = $c->filter && $c->name !== $this->getColumnColumn()->name
+					? $this->getComponent('filterList')->getComponent('filter')->getComponent($columnName)->value
+					: null;
+				if ((!$c->hide && $column === $columnName) || $filterValue) {
 					if ($addBy) {
 						$repositoryName .= 'By';
 						$addBy = false;

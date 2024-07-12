@@ -101,13 +101,11 @@ class ChartControl extends DataControl
 		$columns = [];
 		$columnColumn = $this->main->getColumnColumn();
 		$valueColumn = $this->main->getValueColumn();
-
 		if (in_array($columnColumn->name, ['year', 'month', 'day'])) {
 			$columns[] = ['label' => 'Datum', 'type' => 'date'];
 		} else {
 			$columns[] = ['label' => $columnColumn->label, 'type' => 'string'];
 		}
-
 		if (count($this->items) > 1 || !$valueColumn->chart->series) {
 			foreach ($this->items as $cols) {
 				$columns[] = ['label' => 'Celkem', 'type' => 'number'];
@@ -185,7 +183,6 @@ class ChartControl extends DataControl
 	{
 		$columnColumn = $this->main->getColumnColumn();
 		$valueColumn = $this->main->getValueColumn();
-
 		$options = [
 			'interpolateNulls' => true,
 			'fontName' => $this->visualization->fontName === 'system' ? "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" : $this->visualization->fontName,
@@ -231,7 +228,6 @@ class ChartControl extends DataControl
 			'color' => $this->visualization->textColor,
             'isStacked' => $valueColumn->chart?->stacked ? $valueColumn->chart->stacked : null,
 		];
-
 		if (count($this->items) == 1 && !$valueColumn->chart->series && in_array($columnColumn->name, ['year', 'month']) && $valueColumn->chart->cumulative) {
 			$options['vAxes'][] = [
 				'gridlines' => ['count' => 11],
@@ -249,9 +245,6 @@ class ChartControl extends DataControl
 				],
 			];
 		}
-
-		bdump($options);
-
 		return $options;
 	}
 
