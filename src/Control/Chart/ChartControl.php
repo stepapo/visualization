@@ -228,6 +228,27 @@ class ChartControl extends DataControl
 			'color' => $this->visualization->textColor,
             'isStacked' => $valueColumn->chart?->stacked ? $valueColumn->chart->stacked : null,
 		];
+		if ($valueColumn->chart->series && $valueColumn->chart->separateSeriesAxis) {
+			$options['series'] = [];
+			foreach ($valueColumn->chart->series as $key => $serie) {
+				$column = $this->columns[$serie];
+				$options['series'][] = ['targetAxisIndex' => $key, 'type' => $column->chart?->type ?: 'line'];
+				if ($key === 0) {
+					continue;
+				}
+				$vAxe = [
+					'gridlines' => ['count' => 5, 'color' => $this->visualization->gridlineColor],
+					'viewWindow' => [
+						'min' => $column->chart?->min !== null ? $column->chart->min : null,
+						'max' => $column->chart?->max !== null ? $column->chart->max : null,
+					]
+				];
+				if ($key > 1) {
+					$vAxe['textPosition'] = 'none';
+				}
+				$options['vAxes'][] = $vAxe;
+			}
+		}
 		if (count($this->items) == 1 && !$valueColumn->chart->series && in_array($columnColumn->name, ['year', 'month']) && $valueColumn->chart->cumulative) {
 			$options['vAxes'][] = [
 				'gridlines' => ['count' => 11],
