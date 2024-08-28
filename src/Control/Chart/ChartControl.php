@@ -221,7 +221,12 @@ class ChartControl extends DataControl
 				'top' => count($this->items) > 1 || $valueColumn->chart->series || (in_array($columnColumn->name, ['year', 'month']) && $valueColumn->chart->cumulative) ? 25 : ($columnColumn->chart?->top !== null ? $columnColumn->chart->top : 0),
 				'bottom' => $columnColumn->chart?->bottom !== null ? $columnColumn->chart->bottom : 0,
 			],
-			'legend' => 'top',
+			'legend' => [
+				'position' => 'top',
+				'textStyle' => ['color' => $this->visualization->textColor],
+				'pagingTextStyle' => ['color' => $this->visualization->primaryColor],
+				'scrollArrows' => ['activeColor' => $this->visualization->primaryColor],
+			],
             'focusTarget' => 'category',
 			'colors' => $valueColumn->chart?->colors ? $valueColumn->chart->colors : [$this->visualization->primaryColor],
 			'backgroundColor' => $this->visualization->bgColor,
@@ -241,7 +246,8 @@ class ChartControl extends DataControl
 					'viewWindow' => [
 						'min' => $column->chart?->min !== null ? $column->chart->min : null,
 						'max' => $column->chart?->max !== null ? $column->chart->max : null,
-					]
+					],
+					'textStyle' => ['color' => $this->visualization->textColor],
 				];
 				if ($key > 1) {
 					$vAxe['textPosition'] = 'none';
