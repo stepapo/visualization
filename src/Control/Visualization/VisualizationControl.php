@@ -11,6 +11,7 @@ use Stepapo\Data\Column;
 use Stepapo\Data\Control\DataControl;
 use Stepapo\Data\Control\FilterList\FilterListControl;
 use Stepapo\Data\Control\MainComponent;
+use Stepapo\Data\Helper;
 use Stepapo\Data\Option;
 use Stepapo\Visualization\Control\Chart\ChartControl;
 use Stepapo\Visualization\Control\ColumnPicker\ColumnPickerControl;
@@ -25,38 +26,38 @@ use Stepapo\Visualization\VisualizationView;
 class VisualizationControl extends DataControl implements MainComponent
 {
 	private array $crossColumnNames;
-    private ICollection $collection;
+	private ICollection $collection;
 
 
-    public function __construct(
+	public function __construct(
 		private Visualization $visualization,
 		private IModel $orm,
-    ) {}
+	) {}
 
 
-    public function render(): void
-    {
+	public function render(): void
+	{
 		$this->template->columnColumn = $this->getColumnColumn();
 		$this->template->valueColumn = $this->getValueColumn();
-        $this->filter()->sort();
-        $this->template->render($this->getView()->visualizationTemplate);
-    }
+		$this->filter()->sort();
+		$this->template->render($this->getView()->visualizationTemplate);
+	}
 
 
-    public function getView(): VisualizationView
-    {
-        return $this->visualization->view;
-    }
+	public function getView(): VisualizationView
+	{
+		return $this->visualization->view;
+	}
 
 
-    public function createComponentChart(): ChartControl
-    {
-        return new ChartControl($this, $this->visualization, $this->getCollection(), $this->visualization->columns);
-    }
+	public function createComponentChart(): ChartControl
+	{
+		return new ChartControl($this, $this->visualization, $this->getCollection(), $this->visualization->columns);
+	}
 
 
-    public function createComponentFilterList(): FilterListControl
-    {
+	public function createComponentFilterList(): FilterListControl
+	{
 		$visibleColumns = array_filter(
 			$this->visualization->columns,
 			fn(Column $c) => $c->cross && !$c->hide && $c->name !== $this->getColumnColumn()->name
@@ -66,7 +67,7 @@ class VisualizationControl extends DataControl implements MainComponent
 			$this->redrawControl();
 		};
 		return $control;
-    }
+	}
 
 
 	public function createComponentColumnPicker(): ColumnPickerControl
@@ -90,38 +91,38 @@ class VisualizationControl extends DataControl implements MainComponent
 	}
 
 
-    private function filter(): VisualizationControl
-    {
-        foreach ($this->visualization->columns as $column) {
-            if (!$column->filter || $column->name === $this->getColumnColumn()->name) {
-                continue;
-            }
-            $value = $this->getComponent('filterList')->getComponent('filter')->getComponent($column->name)->value;
-            if (!$value) {
-                continue;
-            }
-            if (!isset($column->filter->options[$value])) {
-                $this->getComponent('filterList')->getComponent('filter')->getComponent($column->name)->value = null;
-                continue;
-            }
-            if ($column->filter->options[$value] instanceof Option && $column->filter->options[$value]->condition) {
-                $this->collection = $this->getCollection()->findBy($column->filter->options[$value]->condition);
-            } else {
-                $this->collection = $this->getCollection()->findBy([$column->name => $value]);
-            }
-        }
-        return $this;
-    }
+	private function filter(): VisualizationControl
+	{
+		foreach ($this->visualization->columns as $column) {
+			if (!$column->filter || $column->name === $this->getColumnColumn()->name) {
+				continue;
+			}
+			$value = $this->getComponent('filterList')->getComponent('filter')->getComponent($column->name)->value;
+			if (!$value) {
+				continue;
+			}
+			if (!isset($column->filter->options[$value])) {
+				$this->getComponent('filterList')->getComponent('filter')->getComponent($column->name)->value = null;
+				continue;
+			}
+			if ($column->filter->options[$value] instanceof Option && $column->filter->options[$value]->condition) {
+				$this->collection = $this->getCollection()->findBy($column->filter->options[$value]->condition);
+			} else {
+				$this->collection = $this->getCollection()->findBy([$column->name => $value]);
+			}
+		}
+		return $this;
+	}
 
 
-    private function sort(): VisualizationControl
-    {
+	private function sort(): VisualizationControl
+	{
 		if ($this->getColumnColumn()->name === 'month') {
 			$this->collection = $this->getCollection()->orderBy('year');
 		}
-        $this->collection = $this->getCollection()->orderBy($this->getColumnColumn()->getNextrasName());
-        return $this;
-    }
+		$this->collection = $this->getCollection()->orderBy(Helper::getNextrasName($this->getColumnColumn()->columnName));
+		return $this;
+	}
 
 
 	public function getColumnColumn(): Column
