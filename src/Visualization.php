@@ -6,12 +6,12 @@ namespace Stepapo\Visualization;
 
 use Stepapo\Data\Column;
 use Stepapo\Utils\Attribute\ArrayOfType;
-use Stepapo\Utils\Attribute\DefaultFromSchematic;
+use Stepapo\Utils\Attribute\DefaultFromConfig;
 use Stepapo\Utils\Attribute\Type;
-use Stepapo\Utils\Schematic;
+use Stepapo\Utils\Config;
 
 
-class Visualization extends Schematic
+class Visualization extends Config
 {
 	public string $entityName;
 	public string $defaultColumn;
@@ -25,5 +25,5 @@ class Visualization extends Schematic
 	public string $primaryColor;
 	public int $height = 350;
 	/** @var Column[] */ #[ArrayOfType(Column::class)] public array $columns;
-	#[Type(VisualizationView::class), DefaultFromSchematic(VisualizationView::class)] public VisualizationView $view;
+	#[Type(VisualizationView::class), DefaultFromConfig(VisualizationView::class)] public VisualizationView $view;
 }

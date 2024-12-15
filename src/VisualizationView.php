@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Stepapo\Visualization;
 
 use Stepapo\Data\View;
-use Stepapo\Utils\Schematic;
+use Stepapo\Utils\Config;
 
 
-class VisualizationView extends Schematic implements View
+class VisualizationView extends Config implements View
 {
 	public const array DEFAULT_VIEW = [
 		'visualizationTemplate' => __DIR__ . '/Control/Visualization/visualization.latte',
