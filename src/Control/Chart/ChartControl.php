@@ -190,7 +190,7 @@ class ChartControl extends DataControl
 			'hAxis' => [
 				'gridlines' => [
 					'count' => min(ceil(count($this->columnHeaderItems) / ($columnColumn->name == 'month' && !$this->main->getComponent('filterList')->getComponent('filter')->getComponent('year')->value ? 12 : 1)), ($columnColumn->name == 'day' ? 10 : 15)),
-					'color' => $this->visualization->bgColor,
+					'color' => $this->visualization->gridlineColor,
 				],
 				'format' => $columnColumn->chart?->hFormat ? $columnColumn->chart->hFormat : null,
 				'baselineColor' => $this->visualization->bgColor,
@@ -257,7 +257,7 @@ class ChartControl extends DataControl
 		}
 		if (count($this->items) == 1 && !$valueColumn->chart->series && in_array($columnColumn->name, ['year', 'month']) && $valueColumn->chart->cumulative) {
 			$options['vAxes'][] = [
-				'gridlines' => ['count' => 11],
+				'gridlines' => ['count' => 5],
 				'format' => $valueColumn->chart?->vFormat ? $valueColumn->chart->vFormat : null,
 				'textStyle' => ['color' => $this->visualization->textColor],
 			];
