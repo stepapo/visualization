@@ -12,8 +12,8 @@ use Stepapo\Visualization\Visualization;
 
 class ChartTemplate extends DataTemplate
 {
-    /** @var IEntity[][] */ public array $items;
-    /** @var IEntity[] */ public array $columnHeaderItems;
+	/** @var IEntity[][] */ public array $items;
+	/** @var IEntity[] */ public array $columnHeaderItems;
 	public int $count;
 	public array $table;
 	public array $options;

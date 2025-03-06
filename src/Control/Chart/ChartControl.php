@@ -30,61 +30,61 @@ class ChartControl extends DataControl
 
 
 	public function render(): void
-    {
-        $this->template->count = $this->collection->count();
-        foreach ($this->collection as $item) {
+	{
+		$this->template->count = $this->collection->count();
+		foreach ($this->collection as $item) {
 			$rowValue = 0;
-            $columnValue = $this->main->getColumnColumn()->name == 'month' ? $item->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $item->date->format('Y-m-d') : $item->getRawValue($this->main->getColumnColumn()->name));
-            $this->items[$rowValue][$columnValue] = $item;
-            $this->items[$rowValue]['total'] = ($items[$rowValue]['total'] ?? 0) + ($this->getValue($item, $this->main->getValueColumn()->columnName) !== null ? $this->getValue($item, $this->main->getValueColumn()->columnName)[0] : 0);
-            if (!isset($columnHeaderItems[$columnValue])) {
-                $this->columnHeaderItems[$columnValue] = $item;
-            }
-        }
-        uasort($this->columnHeaderItems, fn($a, $b) =>
-            strnatcmp(
-                $this->main->getColumnColumn()->name == 'month' ? (string) $a->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $a->date->format('Y-m-d') : (string) $this->getValue($a, $this->main->getColumnColumn()->columnName)[0]),
-                $this->main->getColumnColumn()->name == 'month' ? (string) $b->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $b->date->format('Y-m-d') : (string) $this->getValue($b, $this->main->getColumnColumn()->columnName)[0])
-            )
-        );
-        uasort($this->items, fn($a, $b) => -($a['total'] <=> $b['total']));
+			$columnValue = $this->main->getColumnColumn()->name == 'month' ? $item->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $item->date->format('Y-m-d') : $item->getRawValue($this->main->getColumnColumn()->name));
+			$this->items[$rowValue][$columnValue] = $item;
+			$this->items[$rowValue]['total'] = ($items[$rowValue]['total'] ?? 0) + ($this->getValue($item, $this->main->getValueColumn()->columnName) !== null ? $this->getValue($item, $this->main->getValueColumn()->columnName)[0] : 0);
+			if (!isset($columnHeaderItems[$columnValue])) {
+				$this->columnHeaderItems[$columnValue] = $item;
+			}
+		}
+		uasort($this->columnHeaderItems, fn($a, $b) =>
+			strnatcmp(
+				$this->main->getColumnColumn()->name == 'month' ? (string) $a->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $a->date->format('Y-m-d') : (string) $this->getValue($a, $this->main->getColumnColumn()->columnName)[0]),
+				$this->main->getColumnColumn()->name == 'month' ? (string) $b->getMonth() : ($this->main->getColumnColumn()->name == 'day' ? $b->date->format('Y-m-d') : (string) $this->getValue($b, $this->main->getColumnColumn()->columnName)[0])
+			)
+		);
+		uasort($this->items, fn($a, $b) => -($a['total'] <=> $b['total']));
 		$this->template->table = $this->createTable();
 		$this->template->options = $this->createOptions();
 		$this->template->numberFormats = $this->createNumberFormats();
-        $this->template->columnHeaderItems = $this->columnHeaderItems;
+		$this->template->columnHeaderItems = $this->columnHeaderItems;
 		$this->template->valueColumn = $this->main->getValueColumn();
-        $this->template->items = $this->items;
+		$this->template->items = $this->items;
 		$this->template->visualization = $this->visualization;
 		$this->template->chartType = $this->main->getColumnColumn()->chart?->type ?: $this->main->getValueColumn()->chart->type;
-        $this->template->render($this->main->getView()->chartTemplate);
-    }
+		$this->template->render($this->main->getView()->chartTemplate);
+	}
 
 
-    public function getValue(IEntity $entity, $columnName): ?array
-    {
-        $columnNames = explode('.', $columnName);
-        $values = [$entity];
-        foreach ($columnNames as $columnName) {
-            $newValues = [];
-            foreach ($values as $value) {
-                if ($value instanceof HasMany) {
-                    foreach ($value as $v) {
-                        if (!isset($v->{$columnName})) {
-                            return null;
-                        }
-                        $newValues[] = $v->{$columnName};
-                    }
-                } else {
-                    if (!isset($value->{$columnName})) {
-                        return null;
-                    }
-                    $newValues[] = $value->{$columnName};
-                }
-            }
-            $values = $newValues;
-        }
-        return $values;
-    }
+	public function getValue(IEntity $entity, $columnName): ?array
+	{
+		$columnNames = explode('.', $columnName);
+		$values = [$entity];
+		foreach ($columnNames as $columnName) {
+			$newValues = [];
+			foreach ($values as $value) {
+				if ($value instanceof HasMany) {
+					foreach ($value as $v) {
+						if (!isset($v->{$columnName})) {
+							return null;
+						}
+						$newValues[] = $v->{$columnName};
+					}
+				} else {
+					if (!isset($value->{$columnName})) {
+						return null;
+					}
+					$newValues[] = $value->{$columnName};
+				}
+			}
+			$values = $newValues;
+		}
+		return $values;
+	}
 
 
 	private function createTable(): array
@@ -227,11 +227,11 @@ class ChartControl extends DataControl
 				'pagingTextStyle' => ['color' => $this->visualization->primaryColor],
 				'scrollArrows' => ['activeColor' => $this->visualization->primaryColor],
 			],
-            'focusTarget' => 'category',
+			'focusTarget' => 'category',
 			'colors' => $valueColumn->chart?->colors ? $valueColumn->chart->colors : [$this->visualization->primaryColor],
 			'backgroundColor' => $this->visualization->bgColor,
 			'color' => $this->visualization->textColor,
-            'isStacked' => $valueColumn->chart?->stacked ? $valueColumn->chart->stacked : null,
+			'isStacked' => $valueColumn->chart?->stacked ? $valueColumn->chart->stacked : null,
 		];
 		if ($valueColumn->chart->series && $valueColumn->chart->separateSeriesAxis) {
 			$options['series'] = [];
