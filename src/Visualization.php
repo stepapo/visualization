@@ -24,6 +24,7 @@ class Visualization extends Config
 	public string $gridlineColor = '#cccccc';
 	public string $primaryColor;
 	public int $height = 350;
+	public ?int $width = null;
 	/** @var Column[] */ #[ArrayOfType(Column::class)] public array $columns;
 	#[Type(VisualizationView::class), DefaultFromConfig(VisualizationView::class)] public VisualizationView $view;
 }
