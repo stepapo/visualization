@@ -60,7 +60,7 @@ class VisualizationControl extends DataControl implements MainComponent
 	{
 		$visibleColumns = array_filter(
 			$this->visualization->columns,
-			fn(Column $c) => $c->cross && !$c->filter->hide && $c->name !== $this->getColumnColumn()->name
+			fn(Column $c) => $c->cross && ($c->filter && !$c->filter->hide) && $c->name !== $this->getColumnColumn()->name && $c->name !== $this->getRowColumn()->name
 		);
 		$control = new FilterListControl($this, $this->visualization->columns, $visibleColumns);
 		$control->onFilter[] = function (FilterListControl $filterList) {
